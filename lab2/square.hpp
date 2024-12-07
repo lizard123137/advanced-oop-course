@@ -13,7 +13,7 @@ public:
 
     virtual void calculateArea() override;
     virtual void calculateCircumference() override;
-    virtual void show() override;
+    virtual void show() const override;
 };
 
 Square::Square(float a1): a(a1) {
@@ -34,7 +34,7 @@ void Square::calculateCircumference() {
     this->setCircumference(c);
 }
 
-void Square::show() {
+void Square::show() const {
     std::cout << "Show w klasie Square, pole: " << this->getArea()
         << ", obwod: " << this->getCircumference()
         << std::endl;

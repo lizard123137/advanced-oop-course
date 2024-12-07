@@ -1,4 +1,4 @@
-
+.PHONY: all clean
 
 all:
 	g++ ./main.cc -o ./build/main

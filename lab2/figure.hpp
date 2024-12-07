@@ -19,7 +19,7 @@ public:
 
     virtual void calculateArea()=0;
     virtual void calculateCircumference()=0;
-    virtual void show();
+    virtual void show() const;
 };
 
 Figure::Figure() {
@@ -46,7 +46,7 @@ void Figure::setCircumference(float circ1) {
     this->circumference = circ1;
 }
 
-void Figure::show() {
+void Figure::show() const {
     std::cout << "Pole: " << this->area << ", Obwod: " << this->circumference << std::endl;
 }
 

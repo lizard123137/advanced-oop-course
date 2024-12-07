@@ -5,6 +5,7 @@
 #include "circle.hpp"
 
 int main(void) {
+    // Zad 2.1
     Figure* f1 = new Square(5);
     Figure* f2 = new Circle(3);
 
@@ -18,6 +19,8 @@ int main(void) {
 
     delete f1;
     delete f2;
+
+    // Zad 2.2
 
     return EXIT_SUCCESS;
 }
