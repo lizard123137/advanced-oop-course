@@ -1,16 +1,20 @@
 #include <iostream>
 #include <algorithm>
 #include <random>
+#include <list>
 
 int main(void) {
+    // 4.2
     std::random_device rd;
     std::mt19937 mt(rd());
-    std::uniform_int_distribution dist(-100, 100);
+    std::uniform_int_distribution dist(1, 10);
 
     int n = dist(mt);
+    
+    dist = std::uniform_int_distribution(-100, 100);
 
     std::vector<int> wylosowane = {};
-    std::vector<int> posegregowane = {};
+    std::list<int> posegregowane = {};
 
     for(size_t i = 0; i < n; ++i) {
         wylosowane.push_back(dist(mt));
