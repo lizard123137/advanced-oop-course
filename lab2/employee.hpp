@@ -17,9 +17,10 @@ public:
     Employee(string surname, uint8_t age, uint8_t experience, uint32_t salary)
         : surname(surname), age(age), experience(experience), salary(salary) { }
     Employee();
-    virtual ~Employee();
+    virtual ~Employee() {}
 
     virtual void show() const;
+    virtual float calculateBonus(uint32_t value) const = 0;
     virtual uint32_t calculateSalary(uint32_t value) = 0;
 
     uint8_t ageEmployment() const;
@@ -36,9 +37,9 @@ public:
 
 void Employee::show() const {
     std::cout << "Pracownik [\n"
-        << "\tNazwisko: " << this->getSurname()
-        << "\tWiek: " << this->getAge()
-        << "\tDoswiadczenie: " << this->getExperience()
+        << "\tNazwisko: " << this->getSurname() << "\n"
+        << "\tWiek: " << this->getAge() << "\n"
+        << "\tDoswiadczenie: " << this->getExperience() << "\n"
         << "\tPensja: " << this->getSalary()
         << std::endl;
 }
