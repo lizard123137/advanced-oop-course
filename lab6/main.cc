@@ -14,12 +14,21 @@ struct Student {
 	std::string plec;
 };
 
+std::ostream &operator<<(std::ostream &os, Student const &s) {
+	return os << "[" << "\n"
+		<< "\t" << "Index: " << s.index << "\n" 
+		<< "\t" << "Imie: " << s.imie << "\n" 
+		<< "\t" << "Nazwisko: " << s.nazwisko << "\n" 
+		<< "\t" << "Plec: " << s.plec << "\n"
+		<< "]," << std::endl; 
+}
+
 typedef multi_index_container<
 	Student,
 	indexed_by<
 		ordered_non_unique<member<Student, std::string, &Student::nazwisko>>,
 		ordered_unique<member<Student, std::string, &Student::index>>,
-		ordered_unique<member<Student, std::string, &Student::plec>>
+		ordered_non_unique<member<Student, std::string, &Student::plec>>
 	>
 > student_multi;
 
@@ -36,27 +45,24 @@ int main() {
 	students.insert({"99755", "Karolina", "Piotrkowska", "K"});
 	students.insert({"99333", "Anna", "Grudzien", "K"});
 
-    // Odwolanie domyslnym indexem (pierwszym zdefiniowanym)
-    std::cout << "Liczba studentow o nazwisku Nowak: "
-        << students.count("Nowak")
-        << std::endl;
-
-    // Odwolania za pomoca pozostalych indeksow
+	nazwisko_type &nazwisko_idx = students.get<0>();
     index_type &index_idx = students.get<1>();
     plec_type &plec_idx = students.get<2>();
 
-    auto student = index_idx.find("99535");
+    std::cout << "Studenci wg nazwisk (ordered_non_unique):" << std::endl;
+	for(auto &it : nazwisko_idx) {
+		std::cout << it;
+	}
 
-    std::cout << "Student o numerze albumu 99535 to: "
-        << student->imie << " "
-        << student->nazwisko << " "
-        << student->plec
-        << std::endl;
+	std::cout << "Studenci wg indeksow (ordered_unique):" << std::endl;
+	for(auto &it : index_idx) {
+		std::cout << it;
+	}
 
-    // Index typu ordered_unique grupuje rekordy o tej samej wartosci
-    std::cout << "Liczba plci wsrod studentow: "
-        << plec_idx.size()
-        << std::endl;
+	std::cout << "Studenci wg plci (ordered_unique):" << std::endl;
+	for(auto &it : plec_idx) {
+		std::cout << it;
+	}
 
 	return EXIT_SUCCESS;
 }
