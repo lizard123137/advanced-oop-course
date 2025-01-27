@@ -16,7 +16,7 @@ void whoWorkMoreThan5Years(Employee** tab, size_t size);
 size_t howManyEarnLessThanMeanBonus(Employee** tab, size_t size);
 
 int main(void) {
-    // Zad 2.1
+    // 2.1
     Figure* f1 = new Square(5);
     Figure* f2 = new Circle(3);
 
@@ -31,7 +31,7 @@ int main(void) {
     delete f1;
     delete f2;
 
-    // Zad 2.2
+    // 2.2
     Employee** tab = new Employee*[4];
 
     tab[0] = new Developer("Kowalski", 24, 4, 5000);

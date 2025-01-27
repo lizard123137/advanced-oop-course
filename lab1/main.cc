@@ -1,8 +1,51 @@
 #include <iostream>
 
+#include "animal.hpp"
+#include "cat.hpp"
+#include "dog.hpp"
 #include "person.hpp"
 #include "student.hpp"
 #include "teacher.hpp"
+
+int howManyProtectedAnimals(Animal animals[], int size) {
+    int acc = 0;
+
+    for(int i = 0; i < size; ++i) {
+        acc += animals[i].getProtectedAnimal();
+    }
+
+    return acc;
+}
+
+int howManyTrackerDogs(Dog dogs[], int size) {
+    int acc = 0;
+
+    for(int i = 0; i < size; ++i) {
+        int tracker = dogs[i].getSkillLevel(SkillType::SKILL_TRACKER);
+        int guide = dogs[i].getSkillLevel(SkillType::SKILL_GUIDE);
+
+        acc += (tracker > guide);
+    }
+
+    return acc;
+}
+
+void howManyCats(Cat cats[], int size) {
+    for(int i = 0; i < size; ++i) {
+        int acc = 0;
+
+        for(int j = 0; j < 5; ++j) {
+            acc += cats[i].getMice(j);
+        }
+
+        std::cout << "Cat nr. "
+            << i + 1
+            << " has hunted "
+            << acc
+            << " mice in the last 5 years"
+            << std::endl;
+    }
+}
 
 int main() {
     // 1.1
@@ -108,6 +151,40 @@ int main() {
         delete students_array_4[i];
     }
     delete[] students_array_4;
+
+    // 1.2
+    Animal animals[5];
+    animals[0] = Animal(4, "Zebra", true);
+    animals[1] = Animal(4, "Kangur", true);
+    animals[2] = Animal(4, "Slon", true);
+    animals[3] = Animal(4, "Krowa", false);
+    animals[4] = Animal(4, "Pies", false);
+
+    std::cout << "Ilosc chronionych zwierzat: "
+        << howManyProtectedAnimals(animals, 5)
+        << std::endl;
+
+    Dog dogs[3];
+    dogs[0] = Dog(4, "Dog", false, "Poodle", 4, 6);
+    dogs[1] = Dog(4, "Dog", false, "Pitbull", 6, 2);
+    dogs[2] = Dog(4, "Dog", false, "Golden Retriever", 5, 8);
+
+    std::cout << "Ilosc psow szukajacych: "
+        << howManyTrackerDogs(dogs, 3)
+        << std::endl;
+
+    Cat cats[3];
+    cats[0] = Cat(4, "Cat", false);
+    cats[1] = Cat(4, "Cat", false);
+    cats[2] = Cat(4, "Cat", false);
+    int mice0[] = { 1, 1, 1, 1, 1 };
+    int mice1[] = { 2, 2, 2, 2, 2 };
+    int mice2[] = { 3, 3, 3, 3, 3 };
+    cats[0].initCat(4, mice0);
+    cats[1].initCat(4, mice1);
+    cats[2].initCat(4, mice2);
+
+    howManyCats(cats, 3);
 
     return EXIT_SUCCESS;
 }
